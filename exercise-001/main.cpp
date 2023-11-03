@@ -19,6 +19,7 @@ auto main(int argc, char **argv) -> int
     fmt::print("Value of variable foo {} and adress of foo {}",
     foo,
     fmt::ptr(&foo));
+
     
     return 0; /* exit gracefully*/
 }
