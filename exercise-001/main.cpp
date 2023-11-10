@@ -16,10 +16,10 @@ auto main(int argc, char **argv) -> int
      * it is much more convenient than std::cout and printf
      * More info at https://fmt.dev/latest/api.html
      */
-    fmt::print("Value of variable foo {} and adress of foo {}",
+    fmt::print("Value of variable foo {} and address of foo {}",
     foo,
     fmt::ptr(&foo));
 
-    
+
     return 0; /* exit gracefully*/
 }
