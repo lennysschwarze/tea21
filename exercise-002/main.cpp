@@ -34,7 +34,7 @@ auto main(int argc, char **argv) -> int
         int_vct.push_back(std::rand() % 101);
     }
 
-    fmt::print("Das ist der Vector: ");
+    fmt::print("Das ist der Vektor: ");
 
     for(int j=0;j<counter;j++)
     {
@@ -47,7 +47,7 @@ auto main(int argc, char **argv) -> int
     auto elapsed = end - start;
     //auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 
-    fmt::print("\nDas ist der sortierte Vector: ");
+    fmt::print("\nDas ist der sortierte Vektor: ");
 
     for(int k=0;k<counter;k++)
     {
