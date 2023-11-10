@@ -7,6 +7,7 @@
 auto main(int argc, char **argv) -> int
 {
    int counter=20;
+   std::vector <int> int_vct;
 
     /**
      * CLI11 is a command line parser to add command line options
@@ -26,10 +27,15 @@ auto main(int argc, char **argv) -> int
 
     printf("%d",counter);
 
+
+    for(int i=0;i<counter;i++)
+    {
+        int_vct.push_back(std::rand() % 101);
+    }
+
+
     return 0;
-
-
-
+/*
     /**
      * The {fmt} lib is a cross platform library for printing and formatting text
      * it is much more convenient than std::cout and printf
