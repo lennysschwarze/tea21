@@ -15,7 +15,19 @@ bool LinkedList::insert_tail(LinkedListNode *node)
     return ret;
   }
   // insert your code here....
+  if (m_head == nullptr) {
+    m_head = node;
+  } else {
+    auto tmp = m_head;
+    while (tmp->pNext != nullptr) {
+      tmp = tmp->pNext;
+    }
+    tmp->pNext = node;
+  }
+
+  ret = true;
   return ret;
+
 }
 
 bool LinkedList::insert_head(LinkedListNode *node)
@@ -25,6 +37,10 @@ bool LinkedList::insert_head(LinkedListNode *node)
     return ret;
   }
   // insert your code here....
+  node->pNext = m_head;
+  m_head = node;
+
+  ret = true;
   return ret;
 }
 
@@ -35,6 +51,10 @@ bool LinkedList::insert_after(LinkedListNode *loc, LinkedListNode *node)
     return ret;
   }
   // insert your code here ....
+  node->pNext = loc->pNext;
+  loc->pNext = node;
+
+  ret = true;
   return ret;
 }
 
@@ -45,6 +65,18 @@ bool LinkedList::insert_before(LinkedListNode *loc, LinkedListNode *node)
     return ret;
   }
   // Insert your code here....
+  if (loc == m_head) {
+    insert_head(node);
+  } else {
+    auto tmp = m_head;
+    while (tmp->pNext != loc) {
+      tmp = tmp->pNext;
+    }
+    tmp->pNext = node;
+    node->pNext = loc;
+  }
+
+  ret = true;
   return ret;
 }
 
@@ -52,6 +84,25 @@ bool LinkedList::remove(LinkedListNode *node)
 {
   bool ret = false;
   // insert your code here ...
+  if (node == nullptr) {
+    return ret;
+  }
+
+  if (node == m_head) {
+    m_head = node->pNext;
+  } else {
+    auto tmp = m_head;
+    while (tmp->pNext != nullptr && tmp->pNext != node) {
+      tmp = tmp->pNext;
+    }
+
+    if (tmp->pNext != nullptr) {
+      tmp->pNext = node->pNext;
+    }
+  }
+
+  delete node;
+  ret = true;
   return ret;
 }
 
