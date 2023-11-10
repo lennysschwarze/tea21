@@ -25,7 +25,7 @@ auto main(int argc, char **argv) -> int
         return app.exit(e);
     }
 
-    printf("Eingabe des Counters: %d\n",counter);
+    fmt::print("Eingabe des Counters: {}\n",counter);
 
     std::srand(std::time(nullptr));
 
