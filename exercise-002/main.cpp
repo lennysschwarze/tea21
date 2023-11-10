@@ -25,7 +25,7 @@ auto main(int argc, char **argv) -> int
         return app.exit(e);
     }
 
-    printf("%d",counter);
+    printf("Eingabe des Counters: %d\n",counter);
 
 
     for(int i=0;i<counter;i++)
@@ -33,6 +33,13 @@ auto main(int argc, char **argv) -> int
         int_vct.push_back(std::rand() % 101);
     }
 
+    fmt::print("Das ist der Vector:");
+
+    for(int j=0;j<counter;j++)
+    {
+        fmt::print("{} ", int_vct[j]);
+    }
+    
 
     return 0;
 /*
