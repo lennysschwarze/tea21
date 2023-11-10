@@ -27,7 +27,8 @@ auto main(int argc, char **argv) -> int
 
     printf("Eingabe des Counters: %d\n",counter);
 
-
+    std::srand(std::time(nullptr));
+    
     for(int i=0;i<counter;i++)
     {
         int_vct.push_back(std::rand() % 101);
@@ -39,18 +40,16 @@ auto main(int argc, char **argv) -> int
     {
         fmt::print("{} ", int_vct[j]);
     }
+
+    sort(int_vct.begin(), int_vct.end());
     
+    fmt::print("\nDas ist der sortierte Vector:");
 
+    for(int k=0;k<counter;k++)
+    {
+        fmt::print("{} ", int_vct[k]);
+    }
+    
     return 0;
-/*
-    /**
-     * The {fmt} lib is a cross platform library for printing and formatting text
-     * it is much more convenient than std::cout and printf
-     * More info at https://fmt.dev/latest/api.html
-     */
-    fmt::print("Hello, {}!\n", app.get_name());
 
-    /* INSERT YOUR CODE HERE */
-
-    return 0; /* exit gracefully*/
 }
