@@ -6,6 +6,8 @@
 
 auto main(int argc, char **argv) -> int
 {
+   int counter=20;
+
     /**
      * CLI11 is a command line parser to add command line options
      * More info at https://github.com/CLIUtils/CLI11#usage
@@ -14,12 +16,19 @@ auto main(int argc, char **argv) -> int
     try
     {
         app.set_version_flag("-V,--version", fmt::format("{} {}", PROJECT_VER, PROJECT_BUILD_DATE));
+        app.add_option("-c,--count", counter, "A help string");
         app.parse(argc, argv);
     }
     catch (const CLI::ParseError &e)
     {
         return app.exit(e);
     }
+
+    printf("%d",counter);
+
+    return 0;
+
+
 
     /**
      * The {fmt} lib is a cross platform library for printing and formatting text
