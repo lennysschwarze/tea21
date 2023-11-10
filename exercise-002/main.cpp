@@ -54,7 +54,7 @@ auto main(int argc, char **argv) -> int
         fmt::print("{} ", int_vct[k]);
     }
     
-    fmt::print("\ntime elapsed: {}", elapsed);
+    fmt::print("\nthe sorting took: {}", elapsed);
     
     return 0;
 
