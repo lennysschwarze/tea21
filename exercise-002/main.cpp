@@ -28,27 +28,33 @@ auto main(int argc, char **argv) -> int
     printf("Eingabe des Counters: %d\n",counter);
 
     std::srand(std::time(nullptr));
-    
+
     for(int i=0;i<counter;i++)
     {
         int_vct.push_back(std::rand() % 101);
     }
 
-    fmt::print("Das ist der Vector:");
+    fmt::print("Das ist der Vector: ");
 
     for(int j=0;j<counter;j++)
     {
         fmt::print("{} ", int_vct[j]);
     }
 
+    auto start = std::chrono::system_clock::now();
     sort(int_vct.begin(), int_vct.end());
-    
-    fmt::print("\nDas ist der sortierte Vector:");
+    auto end = std::chrono::system_clock::now();
+    auto elapsed = end - start;
+    //auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+    fmt::print("\nDas ist der sortierte Vector: ");
 
     for(int k=0;k<counter;k++)
     {
         fmt::print("{} ", int_vct[k]);
     }
+    
+    fmt::print("\ntime elapsed: {}", elapsed);
     
     return 0;
 
