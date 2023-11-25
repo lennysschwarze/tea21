@@ -17,7 +17,7 @@ std::vector<std::vector<pixel>> BMP::read(const std::string& filename)
     infile.read(reinterpret_cast<char*>(&color), sizeof(color));
     fmt::print("offset:{}\nwidth:{}\nheight:{}\ncolordepth:{}\n", offset, width, height, color);
     // uint32_t bytestopad = (width * (color / 3)) % 4;
-    uint32_t bytestopad = (width * 3) % 4;
+    uint32_t bytestopad = (offset+(width * 3)) % 4;
     uint32_t current_pos = offset;
     //fmt::print("bytestopad:{}",bytestopad);
 
@@ -39,7 +39,7 @@ std::vector<std::vector<pixel>> BMP::read(const std::string& filename)
         // Padding
         current_pos = infile.tellg() + bytestopad;
         //fmt::print("Current pos {}", current_pos);
-        // infile.read(reinterpret_cast<char*>(&padding_bytes), bytestopad);
+        //infile.read(reinterpret_cast<char*>(&bytestopad), bytestopad);
     }
     // infile.seekg(54);
 
