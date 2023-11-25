@@ -37,15 +37,8 @@ auto main(int argc, char **argv) -> int
     BMP bmp;
     std::vector<std::vector<pixel>> pixelMatrix;
     pixelMatrix = bmp.read(filename);
-    //     for (size_t row = 30; row < 50; ++row) {
-    //     // Iterate through columns
-    //     for (size_t col = 0; col < 120; ++col) {
-    //         std::cout << "Pixel at row " << row << ", column " << col << ": ";
-    //         std::cout << "Red: " << static_cast<int>(pixelMatrix[row][col].red) << " ";
-    //         std::cout << "Green: " << static_cast<int>(pixelMatrix[row][col].green) << " ";
-    //         std::cout << "Blue: " << static_cast<int>(pixelMatrix[row][col].blue) << "\n";
-    //     }
-    // }
+    
+
     std::vector< std::vector<char> > greypixelMatrix(pixelMatrix.size());
     uint8_t grey;
     pixel px;
@@ -74,17 +67,9 @@ auto main(int argc, char **argv) -> int
             }
 
         }
-    }   
+  }   
 
-        // Print greypixelMatrix
-    for (size_t row = greypixelMatrix.size()-1; row > 0 ; row--) {
-        for (size_t col = 0; col < greypixelMatrix[row].size(); col++) 
-        {
-            fmt::print("{}",greypixelMatrix[row][col]);
-        }
-        fmt::print("\n");
-    }
-    
-    
+  bmp.write(greypixelMatrix);
+
     return 0; /* exit gracefully*/
 }

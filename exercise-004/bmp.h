@@ -17,7 +17,7 @@ struct pixel {
 class BMP {
     public: 
     std::vector<std::vector<pixel>> read(const std::string&  filename);
-    bool write(const std::string&  filename);
+    bool write(std::vector< std::vector<char> > greypixelMatrix);
 };
 
 #endif

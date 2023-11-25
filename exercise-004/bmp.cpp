@@ -45,17 +45,33 @@ std::vector<std::vector<pixel>> BMP::read(const std::string& filename)
 
     return pixelBuffer;
 };
-bool BMP::write(const std::string& filename)
-{
-    auto ret = false;
-    /*    ifstream infile;
-    infile.open("./example/DHBW_24bit.bmp");
-    */
-    return ret;
-}
 
 uint8_t pixel::grey(uint8_t red, uint8_t blue, uint8_t green)
 {
     uint8_t grey = (red + green + blue) / 3;
     return grey;
 };
+
+bool BMP::write(std::vector< std::vector<char> > greypixelMatrix)
+{
+    auto ret = false;
+    /*    ifstream infile;
+    infile.open("./example/DHBW_24bit.bmp");
+    */
+    std::ofstream outfile;
+    outfile.open("/workspaces/tea21/exercise-004/greyscale.txt");
+
+    for (size_t row = greypixelMatrix.size()-1; row > 0 ; row--) {
+        for (size_t col = 0; col < greypixelMatrix[row].size(); col++) 
+        {
+            fmt::print("{}",greypixelMatrix[row][col]);
+            outfile << greypixelMatrix[row][col];
+        }
+        fmt::print("\n");
+        outfile << "\n";
+    }
+
+    outfile.close();
+
+    return ret;
+}
