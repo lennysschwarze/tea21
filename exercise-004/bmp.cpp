@@ -6,20 +6,34 @@ std::vector<std::vector<pixel>> BMP::read(const std::string& filename)
     uint16_t color;
     uint32_t height;
     uint32_t width;
+    /*
+    uint8_t  pad1;
+    uint8_t  pad2;
+    uint8_t  pad3;
+    */
     std::ifstream infile(filename, std::ios::binary | std::ios::in);
-    infile.seekg(10);
+    infile.seekg(10);  //bytes 10 to 14 are the amount of offset bytes till pixel data begins 
     infile.read(reinterpret_cast<char*>(&offset), sizeof(offset));
-    infile.seekg(18);
+    infile.seekg(18);  //reading of the picture width 
     infile.read(reinterpret_cast<char*>(&width), sizeof(width));
-    infile.seekg(22);
+    infile.seekg(22);  //reading of the picture hight 
     infile.read(reinterpret_cast<char*>(&height), sizeof(height));
-    infile.seekg(28);
+    infile.seekg(28);  // reading of the color depth (24Bit)
     infile.read(reinterpret_cast<char*>(&color), sizeof(color));
     fmt::print("offset:{}\nwidth:{}\nheight:{}\ncolordepth:{}\n", offset, width, height, color);
-    // uint32_t bytestopad = (width * (color / 3)) % 4;
-    uint32_t bytestopad = (offset+(width * 3)) % 4;
+
+    uint32_t bytestopad = 4-((width * 3) % 4); 
     uint32_t current_pos = offset;
     //fmt::print("bytestopad:{}",bytestopad);
+
+    /*
+    infile.seekg(639);
+    infile.read(reinterpret_cast<char*>(&pad1), sizeof(pad1));
+    infile.read(reinterpret_cast<char*>(&pad2), sizeof(pad2));
+    infile.read(reinterpret_cast<char*>(&pad3), sizeof(pad3));
+    
+    fmt::print("pad1:{}\npad2:{}\npad3:{}\n", pad1, pad2, pad3);
+    */
 
     pixel pi;
     std::vector<std::vector<pixel>> pixelBuffer(height);
@@ -41,8 +55,7 @@ std::vector<std::vector<pixel>> BMP::read(const std::string& filename)
         //fmt::print("Current pos {}", current_pos);
         //infile.read(reinterpret_cast<char*>(&bytestopad), bytestopad);
     }
-    // infile.seekg(54);
-
+    
     return pixelBuffer;
 };
 
