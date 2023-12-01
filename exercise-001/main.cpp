@@ -7,6 +7,8 @@
 #include "CLI/CLI.hpp"
 #include "config.h"
 
+int foo;
+
 auto main(int argc, char **argv) -> int
 {
     auto count{20};
@@ -24,6 +26,11 @@ auto main(int argc, char **argv) -> int
     {
         return app.exit(e);
     }
+
+
+    fmt::print("Value of variable foo {} and address of foo {}",
+    foo,fmt::ptr(&foo));
+
 
     /**
      * The {fmt} lib is a cross platform library for printing and formatting text
