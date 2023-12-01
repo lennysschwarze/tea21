@@ -8,32 +8,26 @@
 #include <iostream>
 
 
-int ES_top;
-int ES_Bottom;
-int ES_Buff;
-int BTN;
-
-
-void getInput()
+void getInput(int* BTN_p, int* ES_Buff, int* ES_Bottom, int* ES_top)
 {
     fmt::print("Geben Sie hier den BTN-State ein: \n");
-    std::cin >> BTN;
+    std::cin >> *BTN_p;
     fmt::print("Geben Sie hier den ES-State ein: (0: kein ES, 1: ES_top=1, 2: ES_bottom=1) \n");
-    std::cin >> ES_Buff;
-    if (ES_Buff==0)
+    std::cin >> *ES_Buff;
+    if (*ES_Buff==0)
     {
-        ES_Bottom = 0;
-        ES_top = 0;
+        *ES_Bottom = 0;
+        *ES_top = 0;
     }
-    else if (ES_Buff==1)
+    else if (*ES_Buff==1)
     {
-        ES_Bottom = 0;
-        ES_top = 1;
+        *ES_Bottom = 0;
+        *ES_top = 1;
     }
-    else if (ES_Buff==2)
+    else if (*ES_Buff==2)
     {
-        ES_Bottom = 1;
-        ES_top = 0;
+        *ES_Bottom = 1;
+        *ES_top = 0;
     }
 };
 
@@ -45,38 +39,38 @@ typedef enum {TorState_Auf = 0,
 
 TorState state = TorState_Auf;
 
-void stateMachine()
+void stateMachine(int* BTN_p, int* ES_Buff, int* ES_Bottom, int* ES_top)
 {
     switch (state)
     {
         case TorState_Auf:
-        if (1 == BTN)
+        if (1 == *BTN_p)
         {
             state=TorState_Runter;
         }
-        else if (1 == ES_top)
+        else if (1 == *ES_top)
         {
             state = TorState_Stop_Top;
         }
         break;
         case TorState_Runter:
-        if (1==BTN)
+        if (1==*BTN_p)
         {
             state=TorState_Auf;
         }
-        else if (1==ES_Bottom)
+        else if (1==*ES_Bottom)
         {
             state=TorState_Stop_Bottom;
         }
         break;
         case TorState_Stop_Top:
-        if (1==BTN)
+        if (1==*BTN_p)
         {
             state=TorState_Runter;
         }
         break;
         case TorState_Stop_Bottom:
-        if (1==BTN)
+        if (1==*BTN_p)
         {
             state=TorState_Auf;
         }
@@ -94,27 +88,21 @@ void printState ()
 auto main(int argc, char **argv) -> int
 {
 
+    int ES_top;
+    int ES_Bottom;
+    int ES_Buff;
+    int BTN;
+    int* BTN_p = &BTN;
+    int* ES_Buff_p = &ES_Buff;
+    int* ES_Bottom_p = &ES_Bottom;
+    int* ES_top_p = &ES_top;
     
-    /**
-     * CLI11 is a command line parser to add command line options
-     * More info at https://github.com/CLIUtils/CLI11#usage
-     */
-    CLI::App app{PROJECT_NAME};
-    try
-    {
-        app.set_version_flag("-V,--version", fmt::format("{} {}", PROJECT_VER, PROJECT_BUILD_DATE));
-        app.parse(argc, argv);
-    }
-    catch (const CLI::ParseError &e)
-    {
-        return app.exit(e);
-    }
 
     while(1==1)
     {
         using namespace std::chrono_literals;
-        getInput();
-        stateMachine();
+        getInput(BTN_p, ES_Buff_p, ES_Bottom_p, ES_top_p);
+        stateMachine(BTN_p, ES_Buff_p, ES_Bottom_p, ES_top_p);
         printState();
         const auto start = std::chrono::high_resolution_clock::now();
         std::this_thread::sleep_for(2000ms);
